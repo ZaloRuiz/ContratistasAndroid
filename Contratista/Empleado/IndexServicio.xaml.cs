@@ -11,6 +11,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using Contratista.Empleado;
+using Contratista.Feed_Back;
 
 namespace Contratista.Empleado
 {
@@ -239,6 +240,11 @@ namespace Contratista.Empleado
         {
             Navigation.PushAsync(new ModificarServicio(IdServicio, Nombre_servicio, Telefono, Email, Direccion, Ubicacion_lat, Ubicacion_long, Foto,
                          Estado, Nit, Rubro, Calififacion, Prioridad, Descripcion, Usuario, Contrasena));
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarFeedBackServicio(IdServicio));
         }
     }
 }

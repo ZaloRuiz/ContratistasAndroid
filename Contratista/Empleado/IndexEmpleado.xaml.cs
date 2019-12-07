@@ -13,10 +13,12 @@ namespace Contratista.Empleado
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class IndexEmpleado : TabbedPage
 	{
+        private int IDContratista;
         public IndexEmpleado(int id_contratista, string nombre, string apellido_paterno, string apeliido_maternos, int telefono, string rubro, string estado,
                              decimal calificacion, string foto, string descripcion)
         {
             InitializeComponent();
+            IDContratista = id_contratista;
             idEntry.Text = id_contratista.ToString();
             txtNombre.Text = nombre + " " + apellido_paterno + " " + apeliido_maternos;
             txtTelefono.Text = telefono.ToString();
@@ -26,26 +28,10 @@ namespace Contratista.Empleado
             txtDescripcion.Text = descripcion;
             img_perfil.Source = "http://dmrbolivia.online" + foto;
         }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            var action = await DisplayActionSheet("Nuevo trabajo", "NO", "SI", "Aceptar trabajo?");
-            switch (action)
-            {
-                case "SI":
-                    await Navigation.PushAsync(new TrabajoEmpleado());
-                    break;
-            }
-        }
-
+        
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new ContactanosContratista());
-        }
-
-        private void Button_Clicked_2(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new TrabajoEmpleado());
+            Navigation.PushAsync(new AgregarFeedBackContratista(IDContratista));
         }
 
         private void Button_Clicked_3(object sender, EventArgs e)

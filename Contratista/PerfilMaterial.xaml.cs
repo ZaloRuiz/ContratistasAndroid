@@ -20,6 +20,7 @@ namespace Contratista
         int Numero_telefono = 0;
         private string queryrubro;
         private int idMaterial;
+        private string NombreMaterial;
         private string Latitud;
         private string Longitud;
         ObservableCollection<Productos> producto = new ObservableCollection<Productos>();
@@ -33,6 +34,7 @@ namespace Contratista
             Longitud = ubicacion_long;
             Numero_telefono = telefono;
             idMaterial = id_material;
+            NombreMaterial = nombre;
             nombretxt.Text = nombre;
             rubrotxt.Text = rubro;
             imgPerfil.Source = "http://dmrbolivia.online" + foto;
@@ -164,6 +166,11 @@ namespace Contratista
             {
                 await DisplayAlert("Error", err.Message, "OK");
             }
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarCalificacionMaterial(idMaterial, NombreMaterial));
         }
     }
 }

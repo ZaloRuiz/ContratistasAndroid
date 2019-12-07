@@ -57,9 +57,16 @@ namespace Contratista
             {
                 await DisplayAlert("ERROR", err.ToString(), "OK");
             }
-            listSearch.ItemsSource = Items;
-
+            if(TxtBuscado == null)
+            {
+                listSearch.ItemsSource = Items;
+            }
+            else
+            {
+                listSearch.ItemsSource = Items.Where(x => x.rubro.ToLower().Contains(TxtBuscado.ToLower()) || x.descripcion.ToLower().Contains(TxtBuscado.ToLower()));
+            }
         }
+
         void InitSearchBar()
         {
             sb_search.TextChanged += (s, e) => FilterItem(sb_search.Text);
@@ -69,6 +76,7 @@ namespace Contratista
         private void FilterItem(string filter)
         {
             listSearch.BeginRefresh();
+            
             if (string.IsNullOrWhiteSpace(filter))
             {
                 listSearch.ItemsSource = Items;

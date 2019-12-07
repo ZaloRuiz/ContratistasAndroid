@@ -11,6 +11,7 @@ using Contratista.Datos;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using Contratista.Feed_Back;
 
 namespace Contratista.Empleado
 {
@@ -56,24 +57,13 @@ namespace Contratista.Empleado
             Fundaempresa = fundaempresa;
             Usuario = usuario;
             Contrasena = contrasena;
-
-           
-            GetInfo();
             TraerPerfil();
         }
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            idEntry.Text = IdEmpresa.ToString();
-            //txtNombre.Text = Nombre_empresa;
-            //txtTelefono.Text = Telefono.ToString();
-            //txtEmail.Text = Email;
-            //txtRubro.Text = Rubro;
-            //txtPrioridad.Text = Prioridad.ToString();
-            
-            //txtNit.Text = Nit.ToString();
-            //txtDescripcion.Text = Descripcion;
-            //img_perfil.Source = "http://dmrbolivia.online" + Foto;
+            portafolio_Empresas.Clear();
+            GetInfo();
         }
         private async void TraerPerfil()
         {
@@ -99,9 +89,8 @@ namespace Contratista.Empleado
             }
 
         }
-            private async void GetInfo()
+        private async void GetInfo()
         {
-
             try
             {
                 HttpClient client = new HttpClient();
@@ -127,10 +116,6 @@ namespace Contratista.Empleado
                         });
                     }
                 }
-
-
-
-
             }
 
             catch (Exception erro)
@@ -145,8 +130,6 @@ namespace Contratista.Empleado
             var detalles = e.Item as Portafolio_empresa;
             await Navigation.PushAsync(new VerportafolioEmpresaE(detalles.id_portafolio_e, detalles.nombre, detalles.imagen_1, detalles.imagen_2, detalles.imagen_3,
                                                             detalles.imagen_4, detalles.imagen_5, detalles.imagen_6, detalles.imagen_7, detalles.id_empresa));
-
-
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -157,6 +140,11 @@ namespace Contratista.Empleado
         private void Modificar_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new ModificarEmpresa(IdEmpresa, Nombre_empresa,Telefono,Email,Direccion,Ubicacion_lat,Ubicacion_long,Foto,Nit, Rubro, Calififacion, Prioridad, Descripcion, Fundaempresa, Usuario, Contrasena ));
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarFeedBackEmpresa(IdEmpresa));
         }
     }
 }

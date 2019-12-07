@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Contratista.Datos;
+using Contratista.Feed_Back;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -56,8 +57,7 @@ namespace Contratista.Empleado
             Usuario = usuario;
             Contrasena = contrasena;
 
-            GetInfo();
-            GetPromo();
+            
             Nombre_material = nombre;
             IdMaterial = id_material;
             txtNombre.Text = nombre;
@@ -68,18 +68,21 @@ namespace Contratista.Empleado
             txtDescripcion.Text = descripcion;
             txtNit.Text = nit.ToString();
             img_perfil.Source = "http://dmrbolivia.online" + foto;
-            listaProducto.IsPullToRefreshEnabled = true;
         }
-
-        private async void ListPortafolios_ItemTapped(object sender, ItemTappedEventArgs e)
+        protected override void OnAppearing()
         {
-           
+            base.OnAppearing();
+            productos.Clear();
+            stkPromoActiva.Children.Clear();
+            stkPromoInactiva.Children.Clear();
+            GetInfo();
+            GetPromo();
         }
 
         private async void ListaProducto_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var detalles = e.Item as Productos;
-            await Navigation.PushAsync(new VerProducto(detalles.id_producto, detalles.nombre, detalles.descripcion, detalles.imagen_1,
+            await Navigation.PushAsync(new VerProductoMaterial(detalles.id_producto, detalles.nombre, detalles.descripcion, detalles.imagen_1,
                 detalles.imagen_2, detalles.id_material));
         }
         private async void GetInfo()
@@ -100,7 +103,8 @@ namespace Contratista.Empleado
                             id_producto = item.id_producto,
                             imagen_1 = item.imagen_1,
                             imagen_2 = item.imagen_2,
-                            descripcion = item.descripcion
+                            descripcion = item.descripcion,
+                            id_material = item.id_material
                         });
                     }
                 }
@@ -227,6 +231,11 @@ namespace Contratista.Empleado
         private void Button_Clicked_1(object sender, EventArgs e)
         {
             Navigation.PushAsync(new AgregarProducto(IdMaterial, Nombre_material));
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarFeedBackMaterial(IdMaterial));
         }
     }
 }

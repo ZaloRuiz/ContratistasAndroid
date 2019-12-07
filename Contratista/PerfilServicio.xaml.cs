@@ -23,6 +23,7 @@ namespace Contratista
         int Numero_telefono = 0;
         private string queryrubro;
         private int idServicio;
+        private string NombreServicio;
         private string Latitud;
         private string Longitud;
         ObservableCollection<Catalogo> catalogos = new ObservableCollection<Catalogo>();
@@ -37,6 +38,7 @@ namespace Contratista
             queryrubro = rubro;
             Numero_telefono = telefono;
             idServicio = id_servicio;
+            NombreServicio = nombre;
             nombretxt.Text = nombre;
             rubrotxt.Text = rubro;
             imgPerfil.Source = "http://dmrbolivia.online" + foto;
@@ -158,7 +160,6 @@ namespace Contratista
                 await DisplayAlert("ERROR", err.ToString(), "OK");
             }
         }
-
         private async void ImageButton_Clicked_1(object sender, EventArgs e)
         {
             try
@@ -169,6 +170,10 @@ namespace Contratista
             {
                 await DisplayAlert("Error", err.Message, "OK");
             }
+        }
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarCalificacionServicio(idServicio, NombreServicio));
         }
     }
 }

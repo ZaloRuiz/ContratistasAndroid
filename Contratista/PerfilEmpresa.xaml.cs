@@ -18,6 +18,7 @@ namespace Contratista
 	{
         int Numero_telefono = 0;
         private int IdEmpresa;
+        private string NombreEmpresa;
         private string Latitud;
         private string Longitud;
         ObservableCollection<Portafolio_empresa> portafolios_empresas = new ObservableCollection<Portafolio_empresa>();
@@ -30,6 +31,7 @@ namespace Contratista
             Latitud = ubicacion_lat;
             Longitud = ubicacion_long;
             IdEmpresa = id_empresa;
+            NombreEmpresa = nombre;
             nombretxt.Text = nombre;
             txtTelefono.Text = telefono.ToString();
             imgPerfil.Source = "http://dmrbolivia.online" + foto;
@@ -118,6 +120,11 @@ namespace Contratista
             {
                 await DisplayAlert("Error", err.Message, "OK");
             }
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarCalificacionEmpresa(IdEmpresa, NombreEmpresa));
         }
     }
 }

@@ -43,7 +43,7 @@
                 </StackLayout>
                 <StackLayout Padding="5, 20, 5, 10" VerticalOptions="End">
                     <Label Text="Tienes alguna consulta o sugerencia?" TextColor="Black" HorizontalOptions="Center"/>
-                    <Button Text="Contactar soporte" VerticalOptions="End" BackgroundColor="Black" TextColor="White"/>
+                    <Button Text="Contactar soporte" VerticalOptions="End" BackgroundColor="Black" TextColor="White" Clicked="Button_Clicked_1"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

@@ -11,7 +11,7 @@
         <ScrollView>
             <StackLayout BackgroundColor="#000000">
                 <StackLayout HorizontalOptions="Fill" HeightRequest="60" BackgroundColor="Black">
-                    <Label Text="SELECCIONA UNA CATEGORIA1" FontSize="Large" VerticalOptions="CenterAndExpand" TextColor="White"  HorizontalOptions="Center"/>
+                    <Label Text="SELECCIONA UNA CATEGORIA" FontSize="Large" VerticalOptions="CenterAndExpand" TextColor="White"  HorizontalOptions="Center"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="0,0,0,5">
                     <SearchBar x:Name="buscador" Placeholder="Buscar..." VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="White" SearchButtonPressed="Buscador_SearchButtonPressed"/>
@@ -100,16 +100,13 @@
         </ScrollView>
     </ContentPage>
    
-    <ContentPage Title="INICIAR SESION" BackgroundImage="backlogin.jpg">
+    <ContentPage Title="INICIAR SESION">
         <ScrollView>
-            <StackLayout VerticalOptions="Center">
+            <StackLayout VerticalOptions="Start" Padding="5,20,5,20">
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                     <StackLayout Orientation="Vertical" >
                         <Entry x:Name="usuarioEntry" Placeholder="Usuario" WidthRequest="300" HorizontalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Entry x:Name="contrasenaEntry" Placeholder="Contraseña" WidthRequest="300"  IsPassword="True" />
-                        <ImageButton x:Name="vercontrasena" Source="vercontrasena.png" Pressed="Vercontrasena_Pressed" Focused="Vercontrasena_Focused" BackgroundColor="Transparent" />
+                        <Entry x:Name="contrasenaEntry" Placeholder="Contraseña" WidthRequest="300"/>
                     </StackLayout>
                 </StackLayout>
                 <busyindicator:SfBusyIndicator
