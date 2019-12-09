@@ -59,7 +59,7 @@ namespace Contratista.Empleado
 
                 _mediaFile = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
-                    SaveToAlbum = true,
+                    PhotoSize = PhotoSize.Small,
                     Name = "test.jpg"
                 });
 
