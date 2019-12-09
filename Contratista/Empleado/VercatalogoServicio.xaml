@@ -7,20 +7,24 @@
         <ScrollView>
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label x:Name="TituloTxt" FontSize="Large" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="TituloTxt" FontSize="Large" HorizontalOptions="StartAndExpand" />
                     <Button x:Name="btnEditar" Text="EDITAR" HorizontalOptions="End" Clicked="BtnEditar_Clicked"/>
                 </StackLayout>
                 <StackLayout>
                     <syncfusion:SfRotator x:Name="rotator">
+
                         <syncfusion:SfRotator.ItemTemplate>
                             <DataTemplate>
                                 <Image  Source="{Binding Image}"/>
                             </DataTemplate>
+
+
                         </syncfusion:SfRotator.ItemTemplate>
+
                     </syncfusion:SfRotator>
                 </StackLayout>
                 <StackLayout>
-                    <Label x:Name="DescripcionTxt" FontSize="Medium"/>
+                    <Label x:Name="DescripcionTxt" FontSize="Medium" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>

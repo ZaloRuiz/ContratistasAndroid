@@ -16,13 +16,24 @@ namespace Contratista.Empleado
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MostrarPortafolio : ContentPage
 	{
-        private int IdPortafolio;
-        
+        int IdPortafolio;
+        string NombreP;
+        string Imagen_1P;
+        string Imagen_2P;
+        string Imagen_3P;
+        string Imagen_4P;
+        string Imagen_5P;
+        string Imagen_6P;
+        string Imagen_7P;
+        int IdProfesional;
+        int imgPick;
         public MostrarPortafolio(int id_portafolio, string nombre, string imagen_1, string imagen_2, string imagen_3, string imagen_4, string imagen_5, string imagen_6,
                                  string imagen_7, int id_profesional)
         {
             InitializeComponent();
+
             IdPortafolio = id_portafolio;
+
             List<CustomData> GetDataSource()
             {
                 List<CustomData> list = new List<CustomData>();
@@ -38,7 +49,7 @@ namespace Contratista.Empleado
             rotator.ItemsSource = GetDataSource();
             TituloTxt.Text = nombre;
         }
-
+        
         private async void BtnBorrar_Clicked(object sender, EventArgs e)
         {
             var action = await DisplayActionSheet("BORRAR PORTAFOLIO?", null, null, "SI", "NO");

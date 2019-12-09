@@ -5,7 +5,7 @@
     <ContentPage Title="Datos">
         <ContentPage.Content>
             <ScrollView>
-                <StackLayout Padding="5, 5, 5, 5">
+                <StackLayout Padding="5, 5, 5, 5" x:Name="stkDatos">
                     <StackLayout BackgroundColor="Yellow" HeightRequest="200" Orientation="Horizontal">
                         <Image x:Name="img_perfil" Aspect="AspectFit" HorizontalOptions="CenterAndExpand"/>
                     </StackLayout>
@@ -59,19 +59,25 @@
     </ContentPage>
     <ContentPage Title="Portafolio">
         <ScrollView>
-            <StackLayout Orientation="Vertical" >
+            <StackLayout Orientation="Vertical" x:Name="stkPortafolio" >
                 <StackLayout Orientation="Horizontal" BackgroundColor="White" HeightRequest="100">
                     <Label Text="MIS PORTAFOLIOS" FontSize="Large" HorizontalOptions="Start" FontAttributes="Bold" VerticalOptions="Center" TextColor="Black"/>
                     <Button Text="Agregar" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Clicked="Button_Clicked"/>
                 </StackLayout>
                 <StackLayout x:Name="stkListaPortafolio">
-                    <ListView x:Name="listPortafolios" RowHeight="50" ItemTapped="OnItemSelected" BackgroundColor="Transparent"
-                              SeparatorVisibility="None" HasUnevenRows="True">
+                    <ListView x:Name="listPortafolios" RowHeight="50"
+                              ItemTapped="OnItemSelected" BackgroundColor="Transparent"
+                              SeparatorVisibility="None"
+                              HasUnevenRows="True"
+                              >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Frame CornerRadius="20" HasShadow="True" Margin="5">
-                                        <Label Text="{Binding nombre}" TextColor="Black" FontAttributes="Bold"/>
+                                    <Frame CornerRadius="5"
+                               HasShadow="True"
+                               Margin="5">
+                                        <Label Text="{Binding nombre}"
+                                          TextColor="Black" FontAttributes="Bold"/>
                                     </Frame>
                                 </ViewCell>
                             </DataTemplate>

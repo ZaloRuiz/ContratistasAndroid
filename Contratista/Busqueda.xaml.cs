@@ -57,7 +57,7 @@ namespace Contratista
             {
                 await DisplayAlert("ERROR", err.ToString(), "OK");
             }
-            if(TxtBuscado == null)
+            if (TxtBuscado == null)
             {
                 listSearch.ItemsSource = Items;
             }
@@ -76,7 +76,7 @@ namespace Contratista
         private void FilterItem(string filter)
         {
             listSearch.BeginRefresh();
-            
+
             if (string.IsNullOrWhiteSpace(filter))
             {
                 listSearch.ItemsSource = Items;

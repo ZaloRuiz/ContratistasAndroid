@@ -12,9 +12,9 @@ using System.Collections.ObjectModel;
 
 namespace Contratista
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ListaContratista : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ListaContratista : ContentPage
+    {
         ObservableCollection<Datos.Calificacion_contratista> calificacion_c = new ObservableCollection<Datos.Calificacion_contratista>();
         public ObservableCollection<Datos.Calificacion_contratista> Calificaciones { get { return calificacion_c; } }
         private string queryrubro;

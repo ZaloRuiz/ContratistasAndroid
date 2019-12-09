@@ -12,13 +12,18 @@
                 </StackLayout>
                 <StackLayout>
                     <syncfusion:SfRotator x:Name="rotator">
+
                         <syncfusion:SfRotator.ItemTemplate>
                             <DataTemplate>
                                 <Image  Source="{Binding Image}"/>
                             </DataTemplate>
+
+
                         </syncfusion:SfRotator.ItemTemplate>
+
                     </syncfusion:SfRotator>
                 </StackLayout>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

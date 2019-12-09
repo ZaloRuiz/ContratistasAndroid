@@ -20,13 +20,14 @@ namespace Contratista.Empleado
         private string IMG1;
         private string IMG2;
         private int IDServicio;
-		public EditarCatalogo (int IdCatalogo, string Nombre, string Imagen_1, string Imagen_2, string Descripcion, int Id_Servicio)
+
+		public EditarCatalogo (int IdCatalogo, string Nombre, string Imagen1, string Imagen2, string Descripcion, int IdServicio)
 		{
 			InitializeComponent ();
             IDCatalogo = IdCatalogo;
-            IMG1 = Imagen_1;
-            IMG2 = Imagen_2;
-            IDServicio = Id_Servicio;
+            IMG1 = Imagen1;
+            IMG2 = Imagen2;
+            IDServicio = IdServicio;
 
             txtNombre.Text = Nombre;
             txtDescripcion.Text = Descripcion;

@@ -102,16 +102,18 @@
    
     <ContentPage Title="INICIAR SESION">
         <ScrollView>
-            <StackLayout VerticalOptions="Start" Padding="5,20,5,20">
+            <StackLayout VerticalOptions="Center">
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                     <StackLayout Orientation="Vertical" >
                         <Entry x:Name="usuarioEntry" Placeholder="Usuario" WidthRequest="300" HorizontalOptions="Center"/>
-                        <Entry x:Name="contrasenaEntry" Placeholder="Contraseña" WidthRequest="300"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <Entry x:Name="contrasenaEntry" Placeholder="Contraseña" WidthRequest="300" HorizontalOptions="Center"/>
                     </StackLayout>
                 </StackLayout>
                 <busyindicator:SfBusyIndicator
                     
-                        AnimationType="DoubleCircle"
+                        AnimationType="Box"
                         HorizontalOptions="Center"
                         IsVisible="False"
                         Title="Cargando"

@@ -5,7 +5,7 @@
     <ContentPage Title="Datos">
         <ContentPage.Content>
             <ScrollView>
-                <StackLayout Padding="5, 5, 5, 5">
+                <StackLayout Padding="5, 5, 5, 5" x:Name="stkDatos">
                     <StackLayout BackgroundColor="Yellow" HeightRequest="200" Orientation="Horizontal">
                         <Image x:Name="img_perfil" Aspect="AspectFit" HorizontalOptions="CenterAndExpand"/>
                     </StackLayout>
@@ -42,7 +42,7 @@
                     </StackLayout>
                     <StackLayout Padding="5, 20, 5, 10" VerticalOptions="End">
                         <Label Text="Tienes alguna consulta o sugerencia?" TextColor="Black" HorizontalOptions="Center"/>
-                        <Button Text="Contactar soporte" VerticalOptions="End" BackgroundColor="Black" TextColor="White" Clicked="Button_Clicked_2"/>
+                        <Button Text="Contactar soporte" VerticalOptions="End" BackgroundColor="Black" TextColor="White"/>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
@@ -50,13 +50,15 @@
     </ContentPage>
     <ContentPage Title="Productos">
         <ScrollView>
-            <StackLayout Orientation="Vertical">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="MIS PRODUCTOS" FontSize="Large" HorizontalOptions="Start" FontAttributes="Bold"/>
-                    <Button Text="Agregar" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Clicked="Button_Clicked_1"/>
+            <StackLayout x:Name="stkProductos" Padding="5">
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="MIS PRODUCTOS" FontSize="Large" HorizontalOptions="Start" FontAttributes="Bold"/>
+                        <Button Text="Agregar" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Clicked="Button_Clicked_1"/>
+                    </StackLayout>
                 </StackLayout>
                 <ListView x:Name="listaProducto"  ItemTapped="ListaProducto_ItemTapped"
-                      RowHeight="50" SeparatorVisibility="None" HasUnevenRows="True" BackgroundColor="Transparent">
+                  RowHeight="50" SeparatorVisibility="None" HasUnevenRows="True" BackgroundColor="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -77,7 +79,7 @@
     </ContentPage>
     <ContentPage Title="Promocion">
         <ScrollView>
-            <StackLayout>
+            <StackLayout x:Name="stkPromo" Padding="5">
                 <StackLayout Orientation="Horizontal">
                     <Label Text="MIS PROMOCIONES" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Start"/>
                     <Button Text="AGREGAR" HorizontalOptions="EndAndExpand" VerticalOptions="Center" BackgroundColor="Green" TextColor="White" Clicked="Button_Clicked"/>

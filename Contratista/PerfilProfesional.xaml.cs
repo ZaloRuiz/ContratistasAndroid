@@ -27,8 +27,8 @@ namespace Contratista
             int nit, string curriculum)
         {
             InitializeComponent();
-            Numero_telefono = telefono;
             NombreProfesional = nombre + " " + apellido_paterno + " " + apellido_materno;
+            Numero_telefono = telefono;
             queryrubro = rubro;
             idProfesional = id_profesional;
             nombretxt.Text = nombre + " " + apellido_paterno + " " + apellido_materno;
@@ -39,6 +39,10 @@ namespace Contratista
             califtxt.Text = calificacion.ToString();
             txtEmail.Text = email;
             GetInfo();
+        }
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarCalificacionProfesional(idProfesional, NombreProfesional));
         }
         private async void GetInfo()
         {
@@ -102,11 +106,6 @@ namespace Contratista
             {
                 await DisplayAlert("Error", err.Message, "OK");
             }
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new AgregarCalificacionProfesional(idProfesional, NombreProfesional));
         }
     }
 }

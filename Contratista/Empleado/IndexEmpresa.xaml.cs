@@ -34,6 +34,7 @@ namespace Contratista.Empleado
         private string Fundaempresa;
         private string Usuario;
         private string Contrasena;
+
         ObservableCollection<Portafolio_empresa> portafolio_Empresas = new ObservableCollection<Portafolio_empresa>();
         public ObservableCollection<Portafolio_empresa> Portafolios { get { return portafolio_Empresas; } }
         public IndexEmpresa(int id_empresa, string nombre, int telefono, string email, string direccion, string ubicacion_lat, string ubicacion_long, string foto ,int nit,
@@ -59,12 +60,15 @@ namespace Contratista.Empleado
             Contrasena = contrasena;
             TraerPerfil();
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
             portafolio_Empresas.Clear();
             GetInfo();
+            TraerPerfil();
         }
+
         private async void TraerPerfil()
         {
             HttpClient client = new HttpClient();
@@ -130,6 +134,8 @@ namespace Contratista.Empleado
             var detalles = e.Item as Portafolio_empresa;
             await Navigation.PushAsync(new VerportafolioEmpresaE(detalles.id_portafolio_e, detalles.nombre, detalles.imagen_1, detalles.imagen_2, detalles.imagen_3,
                                                             detalles.imagen_4, detalles.imagen_5, detalles.imagen_6, detalles.imagen_7, detalles.id_empresa));
+
+
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -140,6 +146,16 @@ namespace Contratista.Empleado
         private void Modificar_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new ModificarEmpresa(IdEmpresa, Nombre_empresa,Telefono,Email,Direccion,Ubicacion_lat,Ubicacion_long,Foto,Nit, Rubro, Calififacion, Prioridad, Descripcion, Fundaempresa, Usuario, Contrasena ));
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Alert", "Quiere Cerrar Sesion", "Si", "No");
+                if (result) await this.Navigation.PushAsync(new Index());
+            });
+            return true;
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)

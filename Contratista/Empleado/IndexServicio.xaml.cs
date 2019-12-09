@@ -35,8 +35,6 @@ namespace Contratista.Empleado
         private string Usuario;
         private string Contrasena;
 
-        //int idServicio = 0;
-        //string Nombre;
         ObservableCollection<Catalogo> catalogos = new ObservableCollection<Catalogo>();
         public ObservableCollection<Catalogo> Catalogos { get { return catalogos; } }
         public IndexServicio(int id_servicio, string nombre, int telefono, string email, string direccion, string ubicacion_lat,
@@ -62,35 +60,54 @@ namespace Contratista.Empleado
             Usuario = usuario;
             Contrasena = contrasena;
 
-
             IdServicio = id_servicio;
             Nombre_servicio = nombre;
-            txtNombre.Text = nombre;
-            txtTelefono.Text = telefono.ToString();
-            txtEmail.Text = email;
-            txtRubro.Text = rubro;
-            txtEstado.Text = estado;
-            txtPrioridad.Text = prioridad.ToString();
-            txtNit.Text = nit.ToString();
-            txtDescripcion.Text = descripcion;
-            img_perfil.Source = "http://dmrbolivia.online" + foto;
         }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            GetPerfil();
             stkPromoActiva.Children.Clear();
             stkPromoInactiva.Children.Clear();
             GetCatalogo();
             GetPromo();
         }
-
+        
         private async void ListPortafolios_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var detalles = e.Item as Catalogo;
             await Navigation.PushAsync(new VercatalogoServicio(detalles.id_catalogo, detalles.nombre, detalles.imagen_1, detalles.imagen_2, detalles.descripcion, detalles.id_servicio));
+        }
+        private async void GetPerfil()
+        {
+            HttpClient client = new HttpClient();
+            var response = await client.GetStringAsync("http://dmrbolivia.online/api_contratistas/servicios/listaServicio.php");
+            var servicios = JsonConvert.DeserializeObject<List<Servicio>>(response);
+            try
+            {
 
 
+                foreach (var item in servicios.Distinct())
+                {
+                    if (item.id_servicio == IdServicio)
+                    {
+                        txtNombre.Text = item.nombre;
+                        txtTelefono.Text = item.telefono.ToString();
+                        txtEmail.Text = item.email;
+                        txtRubro.Text = item.rubro;
+                        txtEstado.Text = item.estado;
+                        txtPrioridad.Text = item.prioridad.ToString();
+                        txtNit.Text = item.nit.ToString();
+                        txtDescripcion.Text = item.descripcion;
+                        img_perfil.Source = "http://dmrbolivia.online" + item.foto;
+                    }
+                }
+            }
+
+            catch (Exception err)
+            {
+                await DisplayAlert("ERROR", err.ToString(), "OK");
+            }
         }
         private async void GetCatalogo()
         {
@@ -100,8 +117,6 @@ namespace Contratista.Empleado
             var catalogosss = JsonConvert.DeserializeObject<List<Catalogo>>(response);
             try
             {
-
-
                 foreach (var item in catalogosss.Distinct())
                 {
                     if (item.id_servicio == IdServicio)
@@ -240,6 +255,15 @@ namespace Contratista.Empleado
         {
             Navigation.PushAsync(new ModificarServicio(IdServicio, Nombre_servicio, Telefono, Email, Direccion, Ubicacion_lat, Ubicacion_long, Foto,
                          Estado, Nit, Rubro, Calififacion, Prioridad, Descripcion, Usuario, Contrasena));
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Alerta", "Quiere Cerrar Sesion?", "Si", "No");
+                if (result) await this.Navigation.PushAsync(new Index());
+            });
+            return true;
         }
 
         private void Button_Clicked_2(object sender, EventArgs e)

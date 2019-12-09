@@ -37,6 +37,7 @@ namespace Contratista.Empleado
            string Usuario, string Contrasena)
 		{
 			InitializeComponent ();
+
             IdEmpresa1 = IdEmpresa;
             Nombre_empresa1 = Nombre_empresa;
             Telefono1 = Telefono;
@@ -95,13 +96,13 @@ namespace Contratista.Empleado
 
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                await DisplayAlert("Hey", "Se edito correctamente", "OK");
-                Navigation.PopAsync();
+                await DisplayAlert("EDITAR", "Se edito correctamente", "OK");
+                await Navigation.PopAsync();
             }
             else
             {
-                await DisplayAlert("Hey", result.StatusCode.ToString(), "Fale Ferga");
-                Navigation.PopAsync();
+                await DisplayAlert("ERROR", result.StatusCode.ToString(), "OK");
+                await Navigation.PopAsync();
             }
 
         }

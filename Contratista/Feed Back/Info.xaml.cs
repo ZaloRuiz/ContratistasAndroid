@@ -21,12 +21,12 @@ namespace Contratista.Feed_Back
 
             private void BtnContactanos_Clicked(object sender, EventArgs e)
             {
-                Navigation.PushAsync(new ContactanosCliente());
+                //contactanos
             }
 
             private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
             {
-                Navigation.PushAsync(new ContactanosCliente());
+                //contactanos
             }
 
             private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)

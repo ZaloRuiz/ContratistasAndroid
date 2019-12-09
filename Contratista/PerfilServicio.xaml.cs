@@ -23,22 +23,22 @@ namespace Contratista
         int Numero_telefono = 0;
         private string queryrubro;
         private int idServicio;
-        private string NombreServicio;
         private string Latitud;
         private string Longitud;
+       private string NombreServicio;
+        
         ObservableCollection<Catalogo> catalogos = new ObservableCollection<Catalogo>();
         public ObservableCollection<Catalogo> Catalogos { get { return catalogos; } }
         public PerfilServicio(int id_servicio, string nombre, int telefono, string email, string direccion, string ubicacion_lat, string ubicacion_long,
             string foto, int nit, string rubro, decimal calificacion, string descripcion)
         {
             InitializeComponent();
-
+            NombreServicio = nombre;
             Latitud = ubicacion_lat;
             Longitud = ubicacion_long;
             queryrubro = rubro;
             Numero_telefono = telefono;
             idServicio = id_servicio;
-            NombreServicio = nombre;
             nombretxt.Text = nombre;
             rubrotxt.Text = rubro;
             imgPerfil.Source = "http://dmrbolivia.online" + foto;
@@ -49,6 +49,10 @@ namespace Contratista
             txtEmail.Text = email;
             GetCatalogo();
             GetPromo();
+        }
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarCalificacionServicio(idServicio, NombreServicio));
         }
 
         private async void GetCatalogo()
@@ -160,6 +164,7 @@ namespace Contratista
                 await DisplayAlert("ERROR", err.ToString(), "OK");
             }
         }
+
         private async void ImageButton_Clicked_1(object sender, EventArgs e)
         {
             try
@@ -170,10 +175,6 @@ namespace Contratista
             {
                 await DisplayAlert("Error", err.Message, "OK");
             }
-        }
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new AgregarCalificacionServicio(idServicio, NombreServicio));
         }
     }
 }

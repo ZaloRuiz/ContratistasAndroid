@@ -16,14 +16,15 @@ namespace Contratista.Empleado
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class VerportafolioEmpresaE : ContentPage
 	{
-        private int IDPortafolio;
         string Nombre;
+        private int IDPortafolio;
         public VerportafolioEmpresaE(int id_portafolio_e, string nombre, string imagen_1, string imagen_2, string imagen_3, string imagen_4, string imagen_5, string imagen_6,
                                  string imagen_7, int id_empresa)
         {
 
             InitializeComponent();
             IDPortafolio = id_portafolio_e;
+
             List<CustomData> GetDataSource()
             {
                 List<CustomData> list = new List<CustomData>();

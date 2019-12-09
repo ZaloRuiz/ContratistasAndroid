@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Contratista.Datos;
-using Contratista.Feed_Back;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -56,17 +55,10 @@ namespace Contratista.Empleado
             Descripcion = descripcion;
             Usuario = usuario;
             Contrasena = contrasena;
-
+            
             Nombre_material = nombre;
             IdMaterial = id_material;
-            txtNombre.Text = nombre;
-            txtTelefono.Text = telefono.ToString();
-            txtEmail.Text = email;
-            txtRubro.Text = rubro;
-            txtPrioridad.Text = prioridad.ToString();
-            txtDescripcion.Text = descripcion;
-            txtNit.Text = nit.ToString();
-            img_perfil.Source = "http://dmrbolivia.online" + foto;
+            
         }
         protected override void OnAppearing()
         {
@@ -81,11 +73,38 @@ namespace Contratista.Empleado
         private async void ListaProducto_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var detalles = e.Item as Productos;
-            await Navigation.PushAsync(new VerProductoMaterial(detalles.id_producto, detalles.nombre, detalles.descripcion, detalles.imagen_1,
+            await Navigation.PushAsync(new VerProducto(detalles.id_producto, detalles.nombre, detalles.descripcion, detalles.imagen_1,
                 detalles.imagen_2, detalles.id_material));
         }
         private async void GetInfo()
         {
+            try
+            {
+                HttpClient client = new HttpClient();
+                var response = await client.GetStringAsync("http://dmrbolivia.online/api_contratistas/materiales/listaMaterial.php");
+                var materials = JsonConvert.DeserializeObject<List<Material>>(response);
+
+                foreach (var item in materials.Distinct())
+                {
+                    if (item.id_material == IdMaterial)
+                    {
+                        txtNombre.Text = item.nombre;
+                        txtTelefono.Text = item.telefono.ToString();
+                        txtEmail.Text = item.email;
+                        txtRubro.Text = item.rubro;
+                        txtPrioridad.Text = item.prioridad.ToString();
+                        txtDescripcion.Text = item.descripcion;
+                        txtNit.Text = item.nit.ToString();
+                        img_perfil.Source = "http://dmrbolivia.online" + item.foto;
+                    }
+                }
+            }
+
+            catch (Exception erro)
+            {
+                Console.Write("EEERRROOOORRR= " + erro);
+            }
+
             try
             {
                 HttpClient client = new HttpClient();
@@ -102,8 +121,7 @@ namespace Contratista.Empleado
                             id_producto = item.id_producto,
                             imagen_1 = item.imagen_1,
                             imagen_2 = item.imagen_2,
-                            descripcion = item.descripcion,
-                            id_material = item.id_material
+                            descripcion = item.descripcion
                         });
                     }
                 }
@@ -115,6 +133,7 @@ namespace Contratista.Empleado
             }
             listaProducto.ItemsSource = productos.Distinct();
         }
+        
         private async void GetPromo()
         {
             try
@@ -213,7 +232,7 @@ namespace Contratista.Empleado
             {
                 Console.Write("EEERRROOOORRR= " + erro);
             }
-
+            
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -227,14 +246,19 @@ namespace Contratista.Empleado
                           Nit, Rubro, Calififacion, Prioridad, Descripcion, Usuario, Contrasena));
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Alert", "Quiere Cerrar Sesion", "Si", "No");
+                if (result) await this.Navigation.PushAsync(new Index());
+            });
+            return true;
+        }
+
         private void Button_Clicked_1(object sender, EventArgs e)
         {
             Navigation.PushAsync(new AgregarProducto(IdMaterial, Nombre_material));
-        }
-
-        private void Button_Clicked_2(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new AgregarFeedBackMaterial(IdMaterial));
         }
     }
 }

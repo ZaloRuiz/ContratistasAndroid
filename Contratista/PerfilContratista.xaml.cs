@@ -21,6 +21,8 @@ namespace Contratista
                                  string rubro, decimal calificacion, string descripcion)
         {
             InitializeComponent();
+            IDContratista = id_contratista;
+            NombreC = nombre + " " + apellido_paterno + " " + apellido_materno;
             queryrubro = rubro;
             Numero_telefono = telefono;
             nombretxt.Text = nombre + " " + apellido_paterno + " " + apellido_materno;
@@ -29,8 +31,10 @@ namespace Contratista
             txtTelefono.Text = telefono.ToString();
             califtxt.Text = calificacion.ToString();
             rubrotxt.Text = rubro;
-            NombreC = nombre + " " + apellido_paterno + " " + apellido_materno;
-            IDContratista = id_contratista;
+        }
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AgregarCalificacion(NombreC, IDContratista));
         }
 
         private async void ImageButton_Clicked(object sender, EventArgs e)
@@ -55,11 +59,6 @@ namespace Contratista
             {
                 await DisplayAlert("Error", err.Message, "OK");
             }
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new AgregarCalificacion(NombreC, IDContratista));
         }
     }
 }
