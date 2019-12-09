@@ -28,7 +28,7 @@ namespace Contratista
             base.OnAppearing();
 
             HttpClient client = new HttpClient();
-            if (queryrubro == "Albañil")
+            if (queryrubro == "Albañil" || queryrubro == "Albanil")
             {
                 var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaAlbanil.php");
                 string result = await client.GetStringAsync(url_contratista);
@@ -56,30 +56,16 @@ namespace Contratista
                 var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
                 listaContratistas.ItemsSource = usuarios;
             }
+            else if (queryrubro == "Carpintero")
+            {
+                var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaCarpintero.php");
+                string result = await client.GetStringAsync(url_contratista);
+                var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
+                listaContratistas.ItemsSource = usuarios;
+            }
             else if (queryrubro == "Pintor")
             {
                 var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaPintor.php");
-                string result = await client.GetStringAsync(url_contratista);
-                var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
-                listaContratistas.ItemsSource = usuarios;
-            }
-            else if (queryrubro == "Cerrajero")
-            {
-                var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaCerrajero.php");
-                string result = await client.GetStringAsync(url_contratista);
-                var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
-                listaContratistas.ItemsSource = usuarios;
-            }
-            else if (queryrubro == "Vidriero")
-            {
-                var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaVidriero.php");
-                string result = await client.GetStringAsync(url_contratista);
-                var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
-                listaContratistas.ItemsSource = usuarios;
-            }
-            else if (queryrubro == "Jardinero")
-            {
-                var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaJardinero.php");
                 string result = await client.GetStringAsync(url_contratista);
                 var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
                 listaContratistas.ItemsSource = usuarios;
@@ -91,10 +77,28 @@ namespace Contratista
                 var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
                 listaContratistas.ItemsSource = usuarios;
             }
+            else if (queryrubro == "Cerrajero")
+            {
+                var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaCerrajero.php");
+                string result = await client.GetStringAsync(url_contratista);
+                var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
+                listaContratistas.ItemsSource = usuarios;
+            }
+            else if (queryrubro == "Jardinero")
+            {
+                var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaJardinero.php");
+                string result = await client.GetStringAsync(url_contratista);
+                var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
+                listaContratistas.ItemsSource = usuarios;
+            }
+            else if (queryrubro == "Vidriero")
+            {
+                var url_contratista = new Uri("http://dmrbolivia.online/api_contratistas/contratistas/querys/listaVidriero.php");
+                string result = await client.GetStringAsync(url_contratista);
+                var usuarios = JsonConvert.DeserializeObject<List<Datos.Contratista>>(result);
+                listaContratistas.ItemsSource = usuarios;
+            }
         }
-
-
-
 
         private async void ListaContratistas_ItemTapped_1(object sender, ItemTappedEventArgs e)
         {

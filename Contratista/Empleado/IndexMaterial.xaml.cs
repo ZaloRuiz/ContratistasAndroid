@@ -57,7 +57,6 @@ namespace Contratista.Empleado
             Usuario = usuario;
             Contrasena = contrasena;
 
-            
             Nombre_material = nombre;
             IdMaterial = id_material;
             txtNombre.Text = nombre;

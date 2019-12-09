@@ -7,7 +7,7 @@
         <ScrollView>
             <StackLayout Padding="5" >
                 <StackLayout Orientation="Horizontal">
-                    <Label x:Name="TituloTxt" FontSize="Large" HorizontalOptions="StartAndExpand" TextColor="White"/>
+                    <Label x:Name="TituloTxt" FontSize="Large" HorizontalOptions="StartAndExpand" TextColor="Black"/>
                     <Button x:Name="btnEditar" Text="BORRAR" HorizontalOptions="End" Clicked="BtnEditar_Clicked"/>
                 </StackLayout>
                 <StackLayout>
